@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<?xml-model href="http://download.ros.org/schema/package_format3.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
+<package format="3">
+  <name>sample_diff_drive_launch</name>
+  <version>0.0.0</version>
+  <description>The sample_diff_drive_launch package</description>
+  <maintainer email="mamoru.sobue@tier4.jp">Mamoru Sobue</maintainer>
+  <license>TODO: License declaration</license>
+
+  <buildtool_depend>ament_cmake_auto</buildtool_depend>
+
+  <export>
+    <build_type>ament_cmake</build_type>
+  </export>
+</package>
