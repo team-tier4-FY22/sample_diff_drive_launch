@@ -34,9 +34,11 @@
   <!-- two wheels -->
   <!-- left wheel -->
   <joint name="left_wheel_joint" type="continuous">
+	<!-- if axis tag is not specified for continuous, the joint/link flickers -->
+	<axis xyz="0 1 0"/>
+	<origin xyz="0 -${vehicle_width/2.0} 0" rpy="0 0 0"/>
 	<parent link="base_link"/>
 	<child link="left_wheel_link"/>
-	<origin xyz="0 -${vehicle_width/2.0} 0" rpy="0 0 0"/>
   </joint>
 
   <link name="left_wheel_link">
@@ -50,9 +52,11 @@
 
   <!-- right wheel -->
   <joint name="right_wheel_joint" type="continuous">
+	<!-- if axis tag is not specified for continuous, the joint/link flickers -->
+	<axis xyz="0 1 0"/>
+	<origin xyz="0 ${vehicle_width/2.0} 0" rpy="0 0 0"/>
 	<parent link="base_link"/>
 	<child link="right_wheel_link"/>
-	<origin xyz="0 ${vehicle_width/2.0} 0" rpy="0 0 0"/>
   </joint>
 
   <link name="right_wheel_link">

@@ -14,8 +14,8 @@ def generate_launch_description():
                                   parameters=[
                                       {'robot_description': urdf_xml}
                                   ])
-    jsp = launch_ros.actions.Node(package='joint_state_publisher',
-                                  executable='joint_state_publisher',
+    jsp = launch_ros.actions.Node(package='joint_state_publisher_gui',
+                                  executable='joint_state_publisher_gui',
                                   output='screen')
     return launch.LaunchDescription([rsp, jsp])
 
