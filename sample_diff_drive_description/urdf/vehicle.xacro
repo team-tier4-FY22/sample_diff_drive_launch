@@ -18,8 +18,7 @@
   <joint name="vehicle_body_joint" type="fixed">
 	<parent link="base_link"/>
 	<child link="vehicle_body"/>
-	<origin xyz="${vehicle_length/2.0 - rear_overhang} 0 ${wheel_radius}"
-			rpy="0 0 0"/>
+	<origin xyz="${vehicle_length/2 - rear_overhang} 0 ${wheel_radius}" rpy="0 0 0"/>
   </joint>
   <link name="vehicle_body">
 	<visual>
