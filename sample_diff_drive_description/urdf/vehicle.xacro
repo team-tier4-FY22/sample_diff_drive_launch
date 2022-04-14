@@ -1,0 +1,97 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://ros.org/wiki/xacro" name="sample_diff_drive">
+
+  <xacro:property name="vehicle_info" value="${load_yaml('$(find sample_diff_drive_description)/config/vehicle_info.param.yaml')}"/>
+  <xacro:property name="wheel_radius" value="${vehicle_info['/**']['ros__parameters']['wheel_radius']}"/>
+  <xacro:property name="wheel_width" value="${vehicle_info['/**']['ros__parameters']['wheel_width']}"/>
+  <xacro:property name="front_overhang" value="${vehicle_info['/**']['ros__parameters']['front_overhang']}"/>
+  <xacro:property name="rear_overhang" value="${vehicle_info['/**']['ros__parameters']['rear_overhang']}"/>
+  <xacro:property name="vehicle_width" value="${vehicle_info['/**']['ros__parameters']['vehicle_width']}"/>
+  <xacro:property name="vehicle_length" value="${vehicle_info['/**']['ros__parameters']['vehicle_length']}"/>
+  <xacro:property name="vehicle_height" value="${vehicle_info['/**']['ros__parameters']['vehicle_height']}"/>
+  
+  <!-- the center of wheels (for control/planning) -->
+  <link name="base_link"/>
+
+  
+  <!-- vehicle body -->
+  <joint name="vehicle_body_joint" type="fixed">
+	<parent link="base_link"/>
+	<child link="vehicle_body"/>
+	<origin xyz="${vehicle_length/2 - rear_overhang} 0 ${wheel_radius}" rpy="0 0 0"/>
+  </joint>
+  <link name="vehicle_body">
+	<visual>
+	  <origin xyz="0 0 0" rpy="0 0 0"/>
+	  <geometry>
+		<box size="${vehicle_length} ${vehicle_width} ${vehicle_height}"/>
+	  </geometry>
+	  <material name="gray">
+		<color rgba="1.0 1.0 1.0 0.8"/>
+	  </material>
+	</visual>
+  </link>
+
+  
+  <!-- two wheels -->
+  <!-- left wheel -->
+  <joint name="left_wheel_joint" type="continuous">
+	<!-- if axis tag is not specified for continuous, the joint/link flickers -->
+	<axis xyz="0 1 0"/>
+	<origin xyz="0 -${vehicle_width/2.0} 0" rpy="0 0 0"/>
+	<parent link="base_link"/>
+	<child link="left_wheel_link"/>
+  </joint>
+
+  <link name="left_wheel_link">
+	<visual>
+	  <origin xyz="0 0 0 " rpy="-${pi/2} 0 0"/>
+	  <geometry>
+		<cylinder radius="${wheel_radius}" length="${wheel_width}"/>
+	  </geometry>
+	  <material name="red">
+		<color rgba="1.0 0.0 0.0 0.8"/>
+	  </material>
+	</visual>
+  </link>
+
+  <!-- right wheel -->
+  <joint name="right_wheel_joint" type="continuous">
+	<!-- if axis tag is not specified for continuous, the joint/link flickers -->
+	<axis xyz="0 1 0"/>
+	<origin xyz="0 ${vehicle_width/2.0} 0" rpy="0 0 0"/>
+	<parent link="base_link"/>
+	<child link="right_wheel_link"/>
+  </joint>
+
+  <link name="right_wheel_link">
+	<visual>
+	  <origin xyz="0 0 0 " rpy="-${pi/2} 0 0"/>
+	  <geometry>
+		<cylinder radius="${wheel_radius}" length="${wheel_width}"/>
+	  </geometry>
+	  <material name="red">
+		<color rgba="1.0 0.0 0.0 0.8"/>
+	  </material>
+	</visual>
+  </link>
+
+
+  <!-- front caster -->
+  <joint name="caster_joint" type="fixed">
+	<parent link="base_link"/>
+	<child link="caster_wheel"/>
+	<origin xyz="${front_overhang * 0.9} 0 0" rpy="0 0 0"/>
+  </joint>
+  <link name="caster_wheel">
+	<visual>
+	  <origin xyz="0 0 0" rpy="${pi/2} 0 0"/>
+	  <geometry>
+		<cylinder radius="${wheel_radius}" length="${wheel_width}"/>
+	  </geometry>
+	  <material name="white">
+		<color rgba="1.0 1.0 1.0 0.8"/>
+	  </material>
+	</visual>
+  </link>
+</robot>
