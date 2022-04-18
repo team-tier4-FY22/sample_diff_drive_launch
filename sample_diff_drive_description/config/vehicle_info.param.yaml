@@ -1,11 +1,16 @@
 /**:
   ros__parameters:
-    wheel_radius: 0.1878
-    wheel_width: 0.037
+    # bare minimum for our diff-drive robot
+    wheel_radius: 0.15
+    wheel_width: 0.03
+    front_overhang: 0.45  # between wheel center and vehicle front
+    rear_overhang: 0.15   # between wheel center and vehicle rear
+    vehicle_width: 0.50
+    vehicle_length: 0.60  # front_overhang + rear_overhang
+    vehicle_height: 0.50
+    caster_wheel_radius: 0.08
+    # vehicle_info_util requries these as of now
     wheel_base: 0.400 # between front wheel center and rear wheel center
     wheel_tread: 0.405 # between left wheel center and right wheel center
-    front_overhang: 0.230 # between front wheel center and vehicle front
-    rear_overhang: 0.210 # between rear wheel center and vehicle rear
     left_overhang: 0.060 # between left wheel center and vehicle left
     right_overhang: 0.060 # between right wheel center and vehicle right
-    vehicle_height: 0.520 # vehicle height + sensor_kit height
