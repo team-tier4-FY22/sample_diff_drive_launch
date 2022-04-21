@@ -15,13 +15,15 @@ def generate_launch_description():
                                   parameters=[
                                       {'robot_description': urdf_xml}
                                   ])
+    """
     jsp = launch_ros.actions.Node(package='joint_state_publisher_gui',
                                   executable='joint_state_publisher_gui',
                                   output='screen')
+    """
     rviz_cfg_dir = os.path.join(pkg_share_path, 'config/config.rviz')
     rviz = launch_ros.actions.Node(package='rviz2',
                                    executable='rviz2',
                                    output='screen',
                                    arguments=['-d', rviz_cfg_dir])
-    return launch.LaunchDescription([rsp, jsp, rviz])
+    return launch.LaunchDescription([rsp, rviz])
 
